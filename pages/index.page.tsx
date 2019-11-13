@@ -4,6 +4,7 @@ import { Form } from "./form.part";
 import { Link } from "./link.part";
 import { useTheme, Paper, Grid } from "@material-ui/core";
 import { useStyles } from "./index.style";
+import { transformer } from "./utm_transformer";
 
 const Layout: React.StatelessComponent = (props) => {
   return (
@@ -30,26 +31,42 @@ const Provider: React.StatelessComponent = (props) => {
   )
 }
 
-import { UTMStateContainer, LinkStateContainer } from "./state";
-export default () => {
+const Main: React.StatelessComponent = (props) => {
 
   const styles = useStyles(useTheme())
+  const [LinkState, setLinkState] = LinkStateContainer.useContainer()
+  const [UTMState] = UTMStateContainer.useContainer()
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    setLinkState({
+      link: transformer.to(UTMState),
+    })
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <Paper className={styles.main}>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
+            <Form />
+          </Grid>
+          <Grid item xs={6}>
+            <Link />
+          </Grid>
+        </Grid>
+      </Paper>
+    </form>
+  )
+}
+
+import { UTMStateContainer, LinkStateContainer } from "./state";
+export default () => {
   return (
     <Layout>
       <Provider>
-        <Paper className={styles.main}>
-          <Grid container spacing={2}>
-            <Grid item xs={6}>
-              <Form />
-            </Grid>
-            <Grid item xs={6}>
-              <Link />
-            </Grid>
-          </Grid>
-        </Paper>
+        <Main />
       </Provider>
     </Layout>
   )
-
 }
