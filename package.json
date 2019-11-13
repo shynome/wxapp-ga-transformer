@@ -7,7 +7,8 @@
   "license": "MIT",
   "scripts": {
     "preexport": "rm -rf out .next && next build",
-    "export": "next export --outdir docs/"
+    "export": "next export --outdir docs/",
+    "postexport": "touch docs/.nojekyll"
   },
   "devDependencies": {
     "@material-ui/icons": "^4.5.1",
