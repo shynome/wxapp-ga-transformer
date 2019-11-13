@@ -17,14 +17,12 @@ export const UTMStateContainer = createContainer(useUTMState)
 
 
 interface LinkState {
-  utm: UTM | null
-  link: string | null
+  link: string,
 }
 
 export const useLinkState = () => {
   return useState<LinkState>({
-    utm: null,
-    link: null,
+    link: '',
   })
 }
 export const LinkStateContainer = createContainer(useLinkState)

@@ -2,10 +2,16 @@ import { UTM } from "./utm";
 import qs from 'querystring'
 
 export const transformer = {
-  from(path: string): UTM {
-    let utm_list = path.split("!")
+  from(raw_path: string): UTM {
+    let [path = '', query_str = ''] = raw_path.split('?')
+    let query = qs.parse(query_str)
+    let ga_params = query['ga'] as string || ''
+    let utm_list = ga_params.split("!")
+    delete query['ga']
+    query_str = qs.stringify(query)
+    path = path + (query_str.length ? '?' : '') + query_str
     let utm: UTM = {
-      path: '',
+      path: path,
       utm_source: utm_list[0] || '', // 必填. 广告系列来源，用于确定具体的搜索引擎、简报或其他来源. 例: google
       utm_medium: utm_list[1] || '', // 必填. 广告系列媒介，用于确定电子邮件或采用每次点击费用 (CPC) 的广告等媒介. 例: cpc
       utm_campaign: utm_list[2] || '', // 必填. 广告系列名称，用于关键字分析，以标识具体的产品推广活动或战略广告系列. 例: spring_sale
