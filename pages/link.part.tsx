@@ -9,20 +9,28 @@ import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 
 const snackbarOption: snackbarOptions = {
   autoHideDuration: 4e3,
-  anchorOrigin: { horizontal: 'right', vertical: 'top' },
+  anchorOrigin: { horizontal: 'left', vertical: 'top' },
   // style: { maxWidth: '400px' },
 }
 
 export const Link = () => {
 
   const styles = useStyles(useTheme())
+  const { enqueueSnackbar } = useSnackbar()
   const [LinkState, setLinkState] = LinkStateContainer.useContainer()
   const [UTMState, setUTMField, setUTM] = UTMStateContainer.useContainer()
   const [value, setValue] = useState(LinkState.link || '')
   const handleParseUTM = () => {
+    let [p = ''] = value.split('?')
+    if (!p.length) {
+      enqueueSnackbar('当前小程序跟踪链接解析 GA 参数失败', {
+        ...snackbarOption,
+        autoHideDuration: 2e3,
+      })
+      return
+    }
     setUTM(transformer.from(value))
   }
-  const { enqueueSnackbar } = useSnackbar()
   const handleChange = useMemo(() => {
     return (e: any) => {
       setValue(e.target.value)
