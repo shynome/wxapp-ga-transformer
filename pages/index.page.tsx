@@ -8,11 +8,12 @@ import { transformer } from "./utm_transformer";
 
 const Layout: React.StatelessComponent = (props) => {
   return (
-    <Grid style={{ height: '100vh', width: '100vw' }}
+    <Grid style={{ height: '100%', width: '100%' }}
       container
       direction="column"
       justify="center"
       alignItems="center"
+      spacing={10}
     >
       <Grid item>
         {props.children}
