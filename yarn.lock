@@ -827,10 +827,10 @@
   resolved "https://registry.npm.taobao.org/@emotion/hash/download/@emotion/hash-0.7.3.tgz?cache=0&sync_timestamp=1568724806465&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40emotion%2Fhash%2Fdownload%2F%40emotion%2Fhash-0.7.3.tgz#a166882c81c0c6040975dd30df24fae8549bd96f"
   integrity sha1-oWaILIHAxgQJdd0w3yT66FSb2W8=
 
-"@material-ui/core@^4.6.0":
-  version "4.6.0"
-  resolved "https://registry.npm.taobao.org/@material-ui/core/download/@material-ui/core-4.6.0.tgz#098a61d2af1778433d2d9a76de95be5f6aa87922"
-  integrity sha1-CYph0q8XeEM9LZp23pW+X2qoeSI=
+"@material-ui/core@^4.6.1":
+  version "4.6.1"
+  resolved "https://registry.npm.taobao.org/@material-ui/core/download/@material-ui/core-4.6.1.tgz#039f97443547a88c41d290deabfb4a044c6031ec"
+  integrity sha1-A5+XRDVHqIxB0pDeq/tKBExgMew=
   dependencies:
     "@babel/runtime" "^7.4.4"
     "@material-ui/styles" "^4.6.0"

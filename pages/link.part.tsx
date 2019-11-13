@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { TextField, Button, useTheme } from "@material-ui/core";
 import { useSnackbar, OptionsObject as snackbarOptions } from 'notistack'
 import { LinkStateContainer } from "./state";
@@ -15,13 +15,24 @@ export const Link = () => {
 
   const styles = useStyles(useTheme())
   const [LinkState, setLinkState] = LinkStateContainer.useContainer()
+  const [value, setValue] = useState(LinkState.link || '')
   const { enqueueSnackbar } = useSnackbar()
+  const handleChange = useMemo(() => {
+    return (e: any) => {
+      setValue(e.target.value)
+    }
+  }, [setValue])
+  const clipboardText = useMemo(() => {
+    return () => value
+  }, [value])
+
+  useEffect(() => {
+    setValue(LinkState.link)
+  }, [LinkState.link])
 
   useEffect(() => {
     var btn = new ClipboardJS('#copy-link', {
-      text: () => {
-        return `dddddddddddddd`
-      }
+      text: clipboardText
     })
     btn
       .on('success', () => {
@@ -31,7 +42,7 @@ export const Link = () => {
         enqueueSnackbar("复制失败, 请手动添加", { ...snackbarOption, autoHideDuration: 2e3, })
       })
     return () => btn.destroy()
-  })
+  }, [clipboardText])
 
   return (
     <form>
@@ -39,11 +50,14 @@ export const Link = () => {
         multiline
         fullWidth
         rows={3}
+        value={value}
         rowsMax={10}
-        label={'小程序路径'}
+        onChange={handleChange}
+        variant='outlined'
+        label={'小程序跟踪链接'}
       />
       <Button id='copy-link' className={styles.copy} fullWidth size='large' variant='contained' color='primary'>
-        点击复制小程序链接
+        点击复制小程序跟踪链接
       </Button>
     </form>
   )

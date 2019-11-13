@@ -1,4 +1,5 @@
 import { UTM } from "./utm";
+import qs from 'querystring'
 
 export const transformer = {
   from(path: string): UTM {
@@ -14,8 +15,18 @@ export const transformer = {
     return utm
   },
   to(utm: UTM): string {
-    let utm_list = []
+    let [path, query_str] = utm.path.split('?')
+    let u = qs.parse(query_str)
+    let utm_list = [
+      utm.utm_source,
+      utm.utm_medium,
+      utm.utm_campaign,
+      utm.utm_term,
+      utm.utm_content,
+    ].filter(v => v)
     let ga_params = utm_list.join('!')
-    return ga_params
+    u['ga'] = ga_params
+    let v = path + '?' + qs.stringify(u)
+    return v
   }
 }

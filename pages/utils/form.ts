@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, SetStateAction, Dispatch } from "react";
 
 export type ChangeHandler = React.ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
 
-export const useFormFields = <T extends object>(defaultFields: T): [T, (t: keyof T) => ChangeHandler] => {
+export const useFormFields = <T extends object>(defaultFields: T): [T, (t: keyof T) => ChangeHandler, Dispatch<SetStateAction<T>>] => {
 
   let [fields, setFields] = useState(defaultFields)
 
@@ -13,6 +13,6 @@ export const useFormFields = <T extends object>(defaultFields: T): [T, (t: keyof
     })
   }
 
-  return [fields, saveFormField]
+  return [fields, saveFormField, setFields]
 
 }
