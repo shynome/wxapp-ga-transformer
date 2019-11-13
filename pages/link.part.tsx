@@ -39,7 +39,7 @@ export const Link = () => {
         enqueueSnackbar("复制成功", snackbarOption)
       })
       .on('error', () => {
-        enqueueSnackbar("复制失败, 请手动添加", { ...snackbarOption, autoHideDuration: 2e3, })
+        enqueueSnackbar("复制失败, 请手动点击输入框进行复制", { ...snackbarOption, autoHideDuration: 2e3, })
       })
     return () => btn.destroy()
   }, [clipboardText])
