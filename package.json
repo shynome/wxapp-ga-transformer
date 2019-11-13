@@ -5,6 +5,10 @@
   "repository": "git@github.com:shynome/wxapp-ga-transformer.git",
   "author": "shynome <shynome@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "preexport": "next build",
+    "export": "rm -rf out && next export"
+  },
   "devDependencies": {
     "@material-ui/icons": "^4.5.1",
     "@types/clipboard": "^2.0.1",
