@@ -7,8 +7,7 @@
   "license": "MIT",
   "scripts": {
     "preexport": "rm -rf out .next && next build",
-    "export": "next export --outdir docs/",
-    "postexport": "cp CNAME docs/"
+    "export": "next export --outdir docs/"
   },
   "devDependencies": {
     "@material-ui/icons": "^4.5.1",
