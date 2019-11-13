@@ -6,8 +6,8 @@
   "author": "shynome <shynome@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "preexport": "next build",
-    "export": "rm -rf out && next export"
+    "preexport": "rm -rf out .next && next build",
+    "export": "next export"
   },
   "devDependencies": {
     "@material-ui/icons": "^4.5.1",
