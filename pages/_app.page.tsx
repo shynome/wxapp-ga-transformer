@@ -1,6 +1,7 @@
 import React from 'react';
 import App from 'next/app';
 import { ThemeProvider } from '@material-ui/styles';
+import { SnackbarProvider } from "notistack";
 import { CssBaseline, NoSsr } from '@material-ui/core';
 import { theme } from './theme';
 
@@ -12,8 +13,10 @@ class MyApp extends App {
     return (
       <NoSsr>
         <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Component {...pageProps} />
+          <SnackbarProvider>
+            <CssBaseline />
+            <Component {...pageProps} />
+          </SnackbarProvider>
         </ThemeProvider>
       </NoSsr>
     );
