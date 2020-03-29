@@ -6,9 +6,9 @@
   "author": "shynome <shynome@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "preexport": "rm -rf out .next && next build",
-    "export": "next export --outdir docs/",
-    "postexport": "touch docs/.nojekyll"
+    "preexport": "rm -rf gh-pages/docs && next build",
+    "export": "next export --outdir gh-pages/docs",
+    "postexport": "touch gh-pages/docs.nojekyll"
   },
   "devDependencies": {
     "@material-ui/icons": "^4.5.1",
